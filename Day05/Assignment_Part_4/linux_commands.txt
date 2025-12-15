@@ -1,0 +1,5 @@
+ls - list content into a directory
+pwd - shows present working directory
+whoami - shows current logged-in user name
+hostname - shows systems hostname
+ip a - shows detailed network stats

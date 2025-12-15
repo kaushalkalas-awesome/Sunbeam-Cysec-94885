@@ -1,0 +1,4 @@
+This line was added later using nano.
+Linux Nano Editor Practice
+This file is created using nano.
+Nano is a powerful and user-friendly text editor
