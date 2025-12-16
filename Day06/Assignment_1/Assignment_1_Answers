@@ -1,0 +1,29 @@
+Day06- Assignment 1
+
+Q1. Why should root SSH login be disabled?
+Ans: It should be disable because, it reduces the risk of brute-force attacks and prevents direct administrative access
+
+Q2. What is a service in Linux?
+Ans: A service in linux is a background process that runs continously that provide services
+
+Q3. Difference between start and enable
+Ans: Start - This immediately runs the service for the current session
+Enable - This configures the service to start automatically at system boot
+
+Q4. Explain r , w , and x
+Ans:r (read): Permissions to view file contents or list a directory
+w (write): Permissions to modify a file or add/remove files in a directory
+x (execute): Permissions to run a file as a program or access a directory
+
+Q5. What happens if permissions are set to 777?
+Ans: if permissions are set to 777 - rwx for owner, rwx for the group and rwx for others
+
+Q6.How does permission help in securing data?
+Ans: Permissions help secure data by controlling who can access, modify or execute files or directories
+
+Q7. What does the x field indicate?
+Ans: In the /etc/passed file, the x indicates that user's password is stored in a shadow file and its encrypted
+
+Q8. Why are passwords not stored in /etc/passwd?
+Ans: Password are stored in /etc/shadow instead of /etc/passwd for security. The /etc/shadow has restricted access, allowing only privileged users to view password hashes, improving security
+
