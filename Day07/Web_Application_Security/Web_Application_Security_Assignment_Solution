@@ -1,0 +1,95 @@
+Day07 - Web Application Security Assignment
+
+Section 1: Application Reconnaissance (Observation Only)
+TASK 1: Website Understanding
+Q. Identify: Input fields (login, search, forms)
+Ans: On the webpage there are 2 Input textfield and 1 btn for login purpose
+
+Q. Which input looks user-controlled
+Ans: User can just input into the textfield and its user-controlled
+
+Q. Why user input is risky
+Ans: Without any input validation, one can insert any payload and get the login access without any actual username and password
+
+Section 2: SQL Injection (Analysis + Lab Simulation)
+TASK 2: SQL Injection Theory
+Q. What is SQL Injection?
+Ans: SQL injection is a web security vulnerability that allows an attacker to interfere with the queries an application makes to its database. It occurs when an application uses unvalidated or unsanitized user input directly in a dynamic SQL query, enabling malicious SQL code to be executed by the database
+
+Q. Why input validation failure causes SQL Injection?
+Ans: Input validation failure causes SQL Injection because the application treats untrusted user input as executable code rather than as harmless data.
+
+Q. Explain the payload: ' OR '1'='1
+Ans: The payload
+' OR '1'='1 is used in a SQL injection (SQLi) attack to manipulate a database query and force it to return all results or bypass authentication
+' - The leading single quote is an attempt to close the original string in the SQL query that the developer intended to build.
+OR '1'='1 - The OR condition is added to the query. Since '1'='1' is a Boolean expression that is always true, the entire WHERE clause of the SQL query becomes true for every record.
+
+Q.What happens at database level when this payload is executed?
+Ans: The payload manipulates the original query structure, often turning a conditional statement (like a WHERE clause) into one that is always true.
+The injected '1'='1' condition is evaluated by the database engine. Since '1' always equals '1', this part of the logical OR statement is always true.
+
+TASK 3: SQL Injection – Simulated Practical
+Q. Why authentication was bypassed
+Ans: It was bypassed, because there was no any validation into the input textfield
+
+Section 3: Other Common Web Attacks (Theory + Mapping)
+TASK 4: Attack Mapping (No Execution on Live Site)
+Q. For each attack, answer the following:
+a. SQL Injection - (Description): SQL injection is a web security vulnerability that allows an attacker to interfere with the queries an application makes to its database.
+(Example Payload): '1 OR '1'='1
+(Impact): unauthorized data access, data loss or corruption
+
+b. XSS - (Description): XSS (Cross-Site Scripting) is a web security flaw where attackers inject malicious scripts (usually JavaScript) into trusted websites, which then run in a victim's browser, allowing the attacker to steal data (cookies, sessions)
+(Example Payload): <SCRIPT>document.cookie=true;//<</SCRIPT>
+(Impact): Session Hijacking, Credential Theft
+
+c. Brute Force - (Description): A brute force attack is a trial-and-error cyberattack where hackers use automated tools to try every possible password or encryption key combination until they find the correct one
+(Example Payload): Simple payload - trying every possible character combination
+(Impact): Malware and Ransomware, System Hijacking, Unauthorized Access
+
+Section 4: Logs & Detection (Blue Team Angle)
+TASK 5: Log Identification
+Q. Which logs would record SQL Injection attempts?
+Ans: Apache access log
+
+TASK 6: Bruteforce Detection
+Q. How does a brute-force attack appear in logs?
+Ans: The logs looks like repetitive failed login from single or multiple ips, they are trying common user and pass like admin, root
+
+Q.Which tools help prevent it?
+Ans: There are multiple tools that prevent this like using captchas' and Fail2ban like tools
+
+Q. Role of:
+a. Fail2ban: 
+Ans: Fail2ban's role is to act as an intrusion prevention tool, monitoring server log files (like SSH, Apache) for repeated failed login attempts or suspicious patterns, and automatically banning the offending IP addresses for a set time to stop brute-force attacks and other malicious activity.
+b. Rate limiting: 
+Ans: Rate limiting controls network traffic by setting caps on request frequency to prevent abuse, Denial of Service (DoS) attacks, and resource exhaustion, ensuring fair access, system stability, and cost control for services like APIs and web apps and it protects against malicious bots
+
+Section 5: Incident Response Scenario
+TASK 7: Incident Response Case Study
+Q. Identify the incident
+Ans: Using grep command we will filter some suspicious patterns into the logs like ', OR
+
+Q.Write actions taken in each phase
+Ans: 
+Identification - In this phase, need to identify unusual patterns in the input textfield using grep cmd
+Containment - We will cap the rate limit and isolate.
+Eradication - Removing the vulnerability from the architecture
+Recovery - Restoring data if loss from the backup and restoring it to original state
+
+Section 7: Security Mitigations
+TASK 9: Prevention Techniques
+Q. How to prevent SQL Injection?
+Ans: Adding proper input validations, using prepared statements for performing sql queries instead of just normal sql queries at the backend
+
+Q. Importance of:
+a. Prepared statements - Prepared statements are crucial in cybersecurity because they prevent SQL injection attacks by separating SQL code from user-supplied data, treating inputs strictly as data, not executable commands, thus stopping attackers from injecting malicious SQL to steal, alter, or delete data
+
+b. Input Validation - it acts as the first defense, preventing attacks like SQL Injection and XSS by ensuring all user-supplied data is clean, correctly formatted, and adheres to rules, stopping malicious code/commands from corrupting databases
+
+c. WAF - A Web Application Firewall (WAF) is crucial in cybersecurity because it acts as a shield, filtering and blocking malicious HTTP/S traffic (like SQL injections, XSS) before it reaches web apps, preventing data breaches
+
+Q. How logs help in early detection?
+Ans: Logs help in early detection by providing
+real-time visibility into system activities, allowing for the identification of unusual patterns or malicious actions (anomalies) before they escalate into major problems
